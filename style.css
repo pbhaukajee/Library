@@ -38,15 +38,40 @@ h1 {
 }
 
 table {
-  margin-left: 165px;
+  margin-left: auto;
   margin-right: auto;
   font-size: 20px;
   margin-top: 50px;
-  text-decoration: underline;
   color: #424a3ffc;
 }
 
 th,
 td {
   width: 200px;
+}
+
+.table-heading {
+  text-decoration: underline;
+}
+
+.table-body {
+  padding: 60px;
+}
+
+.table-data {
+  font-size: 18px;
+}
+
+.read {
+  font-style: italic;
+}
+
+.delete {
+  width: 80px;
+  height: 25px;
+  background-color: rgba(234, 22, 22, 0.854);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
