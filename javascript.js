@@ -32,6 +32,8 @@ function displayBook() {
   });
 }
 
+//extract form input info whwn "Add Book" button(submit button) is clicked and display the book info
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -46,11 +48,3 @@ form.addEventListener("submit", (e) => {
   displayBook();
   form.reset();
 });
-
-//call display function
-displayBook();
-
-// // call function
-// addBookToLibrary("Alchemist", "Paulo Coehlo", 345, false);
-// addBookToLibrary("Rich Dad Poor Dad", "Robert", 280, true);
-// addBookToLibrary("You're a Bad Ass", "Jen Sinero", 200, true);
