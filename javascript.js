@@ -1,32 +1,56 @@
 const myLibrary = [];
 const tableData = document.querySelector("tbody");
+const newBook = document.querySelector(".add-book");
+const form = document.querySelector("form");
 
-function Book(title, author, pages, read) {
+//constructor
+function Book(title, author, pages, haveRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.haveRead = haveRead;
 }
 
-function addBookToLibrary(title, author, pages, read) {
+//add book data to library array
+function addBookToLibrary(title, author, pages, haveRead = false) {
+  let read = haveRead ? "✅" : "❌";
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
 }
 
+//function that display book from myLibrary array in the page
 function displayBook() {
+  //Clear existing table data
+  tableData.innerHTML = "";
+
   myLibrary.forEach((book) => {
-    let tableRow = `<tr class="table-data"><td>${book.title}</td>
-    <td>${book.author}</td>
-    <td>${book.pages}</td>
-    <td class="read">${book.read}</td><td><button class="delete">Delete</button></td></tr>`;
+    let tableRow = `<tr class="table-data"><td class="title">${book.title}</td>
+    <td class="author">${book.author}</td>
+    <td class="pages">${book.pages}</td>
+    <td><button class="read">${book.haveRead}</button></td><td><button class="delete">Delete</button></td></tr>`;
     tableData.insertAdjacentHTML("beforeend", tableRow);
   });
 }
 
-addBookToLibrary("Alchemist", "Paulo Coehlo", 345, "read");
-addBookToLibrary("Rich Dad Poor Dad", "Robert", 280, "read");
-addBookToLibrary("You're a Bad Ass", "Jen Sinero", 200, "read");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
+  // Extracts form input values
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = document.getElementById("pages").value;
+  const haveRead = document.getElementById("read").checked;
+
+  // Adds book to library, displays books, and resets the form
+  addBookToLibrary(title, author, pages, haveRead);
+  displayBook();
+  form.reset();
+});
+
+//call display function
 displayBook();
 
-console.log(myLibrary);
+// // call function
+// addBookToLibrary("Alchemist", "Paulo Coehlo", 345, false);
+// addBookToLibrary("Rich Dad Poor Dad", "Robert", 280, true);
+// addBookToLibrary("You're a Bad Ass", "Jen Sinero", 200, true);

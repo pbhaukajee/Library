@@ -52,6 +52,8 @@ td {
 
 .table-heading {
   text-decoration: underline;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .table-body {
@@ -59,11 +61,18 @@ td {
 }
 
 .table-data {
+  font-size: 19px;
+  text-transform: capitalize;
+}
+
+.author {
+  font-style: italic;
   font-size: 18px;
 }
 
 .read {
-  font-style: italic;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .delete {
