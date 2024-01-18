@@ -12,8 +12,8 @@ function Book(title, author, pages, haveRead) {
 }
 
 //add book data to library array
-function addBookToLibrary(title, author, pages, haveRead = false) {
-  let read = haveRead ? "✅" : "❌";
+function addBookToLibrary(title, author, pages, haveRead) {
+  const read = haveRead ? "✅" : "❌";
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
 }
@@ -30,21 +30,47 @@ function displayBook() {
     <td><button class="read">${book.haveRead}</button></td><td><button class="delete">Delete</button></td></tr>`;
     tableData.insertAdjacentHTML("beforeend", tableRow);
   });
+
+  const deleteRow = document.querySelectorAll(".delete");
+  deleteRow.forEach((button) => {
+    button.addEventListener("click", function () {
+      const rowIndex = button.dataset.index;
+      remove(rowIndex);
+    });
+  });
+
+  const readCheck = document.querySelectorAll(".read");
+  readCheck.forEach((element) => {
+    element.addEventListener("click", function () {
+      if (element.textContent === "✅") {
+        element.textContent = "❌";
+      } else if (element.textContent === "❌") {
+        element.textContent = "✅";
+      }
+    });
+  });
 }
 
-//extract form input info whwn "Add Book" button(submit button) is clicked and display the book info
+//extract form input info when "Add Book" button(submit button) is clicked and display the book info
 
 form.addEventListener("submit", (e) => {
+  //prevents from refreshing the page while submitting
   e.preventDefault();
 
   // Extracts form input values
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const pages = document.getElementById("pages").value;
-  const haveRead = document.getElementById("read").checked;
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
+  let pages = document.getElementById("pages").value;
+  let read = document.getElementById("read").checked;
 
   // Adds book to library, displays books, and resets the form
-  addBookToLibrary(title, author, pages, haveRead);
+  addBookToLibrary(title, author, pages, read);
   displayBook();
   form.reset();
 });
+
+//make a function to delete book
+function remove(index) {
+  myLibrary.splice(index, 1);
+  displayBook();
+}
