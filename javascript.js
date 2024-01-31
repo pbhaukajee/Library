@@ -23,8 +23,8 @@ function displayBook() {
   //Clear existing table data
   tableData.innerHTML = "";
 
-  myLibrary.forEach((book) => {
-    let tableRow = `<tr class="table-data"><td class="title">${book.title}</td>
+  myLibrary.forEach((book, index) => {
+    let tableRow = `<tr class="table-data" data-index="${index}"><td class="title">${book.title}</td>
     <td class="author">${book.author}</td>
     <td class="pages">${book.pages}</td>
     <td><button class="read">${book.haveRead}</button></td><td><button class="delete">Delete</button></td></tr>`;
@@ -32,10 +32,9 @@ function displayBook() {
   });
 
   const deleteRow = document.querySelectorAll(".delete");
-  deleteRow.forEach((button) => {
+  deleteRow.forEach((button, index) => {
     button.addEventListener("click", function () {
-      const rowIndex = button.dataset.index;
-      remove(rowIndex);
+      remove(index);
     });
   });
 
