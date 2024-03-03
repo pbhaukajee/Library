@@ -1,86 +1,140 @@
-body {
-  background-color: rgba(212, 237, 223, 0.971);
-  font-family: sans-serif;
-}
-
-h1 {
-  text-align: center;
-  color: #424a3ffc;
-  font-weight: 900;
-  font-size: 50px;
-}
-
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  padding: 15px;
+#new-book-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
   font-size: 20px;
-}
-
-.form {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.add-book {
-  height: 30px;
-  width: 115px;
-  background-color: rgb(14, 160, 67);
-  color: white;
-  border-radius: 5px;
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
+  background-color: rgba(100, 130, 183, 0.568);
+  border-radius: 10px;
   cursor: pointer;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 20px;
-  margin-top: 50px;
-  color: #424a3ffc;
+form {
+  width: 500px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-th,
-td {
-  width: 200px;
+input[type="text"],
+input[type="number"],
+select {
+  width: 90%;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: 0.3s;
+  margin-bottom: 10px;
 }
 
-.table-heading {
-  text-decoration: underline;
-  font-size: 20px;
-  font-weight: bold;
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #333;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.table-body {
-  padding: 60px;
+label {
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: block;
 }
 
-.table-data {
-  font-size: 19px;
+input[type="submit"] {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 18px;
+  margin-top: 20px;
+  background-color: #4646aad4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: rgba(100, 130, 183, 0.996);
+}
+
+.book-card {
+  display: inline-block;
+  width: 300px;
+  height: 250px;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgb(248, 250, 253);
+}
+
+.book-header {
+  background-color: rgba(100, 130, 183, 0.568);
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+.book-title {
+  margin: 0;
+  font-size: 22px;
   text-transform: capitalize;
 }
 
-.author {
+.book-author {
+  margin: 5px 0 0 0;
+  font-size: 16px;
   font-style: italic;
+  text-transform: capitalize;
+  color: #201f1f;
+}
+
+.book-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.book-pages {
+  margin: 0;
   font-size: 18px;
 }
 
-.read {
-  font-size: 15px;
+.book-status {
+  margin: 10px 0 0 0;
+  font-size: 16px;
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #fff;
   cursor: pointer;
 }
 
-.delete {
-  width: 80px;
-  height: 30px;
-  background-color: rgba(234, 22, 22, 0.854);
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
+button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.remove-btn,
+.toggle-read-btn {
+  margin-top: 25px;
+}
+
+.remove-btn {
+  background-color: rgb(239, 166, 166);
+}
+
+.toggle-read-btn {
+  background-color: rgb(240, 227, 176);
 }

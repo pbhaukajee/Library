@@ -1,75 +1,68 @@
-const myLibrary = [];
-const tableData = document.querySelector("tbody");
-const newBook = document.querySelector(".add-book");
-const form = document.querySelector("form");
+let myLibrary = [];
 
-//constructor
-function Book(title, author, pages, haveRead) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.haveRead = haveRead;
+  this.read = read;
 }
 
-//add book data to library array
-function addBookToLibrary(title, author, pages, haveRead) {
-  const read = haveRead ? "✅" : "❌";
-  const newBook = new Book(title, author, pages, read);
-  myLibrary.push(newBook);
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
+
+function toggleRead(index) {
+  myLibrary[index].toggleRead();
+  render();
 }
 
-//function that display book from myLibrary array in the page
-function displayBook() {
-  //Clear existing table data
-  tableData.innerHTML = "";
-
+function render() {
+  let libraryEl = document.querySelector("#library");
+  libraryEl.innerHTML = "";
   myLibrary.forEach((book, index) => {
-    let tableRow = `<tr class="table-data" data-index="${index}"><td class="title">${book.title}</td>
-    <td class="author">${book.author}</td>
-    <td class="pages">${book.pages}</td>
-    <td><button class="read">${book.haveRead}</button></td><td><button class="delete">Delete</button></td></tr>`;
-    tableData.insertAdjacentHTML("beforeend", tableRow);
-  });
-
-  const deleteRow = document.querySelectorAll(".delete");
-  deleteRow.forEach((button, index) => {
-    button.addEventListener("click", function () {
-      remove(index);
-    });
-  });
-
-  const readCheck = document.querySelectorAll(".read");
-  readCheck.forEach((element) => {
-    element.addEventListener("click", function () {
-      if (element.textContent === "✅") {
-        element.textContent = "❌";
-      } else if (element.textContent === "❌") {
-        element.textContent = "✅";
-      }
-    });
+    let bookEl = document.createElement("div");
+    bookEl.classList.add("book-card");
+    bookEl.innerHTML = `
+    <div class="book-header">
+      <h3 class="book-title">${book.title}</h3>
+      <h5 class="book-author">by ${book.author}</h5>
+    </div>
+    <div class="book-body">
+      <p>${book.pages} pages </p>
+      <p class="book-status">${book.read ? "Read" : "Not Read Yet"}</p>
+      <button class="remove-btn" onclick="removeBook(${index})">Remove</button>
+      <button class="toggle-read-btn" onclick="toggleRead(${index})">Toggle Read</button>
+    </div>  
+    `;
+    libraryEl.appendChild(bookEl);
   });
 }
 
-//extract form input info when "Add Book" button(submit button) is clicked and display the book info
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  render();
+}
 
-form.addEventListener("submit", (e) => {
-  //prevents from refreshing the page while submitting
-  e.preventDefault();
+function addBookToLibrary() {
+  let title = document.querySelector("#title").value;
+  let author = document.querySelector("#author").value;
+  let pages = document.querySelector("#pages").value;
+  let read = document.querySelector("#read").checked;
+  let newBook = new Book(title, author, pages, read);
+  myLibrary.push(newBook);
+  render();
+}
 
-  // Extracts form input values
-  let title = document.getElementById("title").value;
-  let author = document.getElementById("author").value;
-  let pages = document.getElementById("pages").value;
-  let read = document.getElementById("read").checked;
+const newBookBtn = document.querySelector("#new-book-btn");
 
-  // Adds book to library, displays books, and resets the form
-  addBookToLibrary(title, author, pages, read);
-  displayBook();
-  form.reset();
+newBookBtn.addEventListener("click", function () {
+  let newBookForm = document.querySelector("#new-book-form");
+  newBookForm.style.display = "block";
 });
 
-//make a function to delete book
-function remove(index) {
-  myLibrary.splice(index, 1);
-  displayBook();
-}
+document
+  .querySelector("#new-book-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    addBookToLibrary();
+  });
